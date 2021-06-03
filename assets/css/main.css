@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Adora Bouton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~assets/fonts/AdoraBouton-Regular.ttf') format('truetype');
+}
