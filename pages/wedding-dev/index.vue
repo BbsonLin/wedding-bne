@@ -78,6 +78,8 @@ export default {
 
         // Mouse Control
         const mouse = Mouse.create(sCanvas.elt)
+        /// https://youtu.be/W-ou_sVlTWk?t=386
+        mouse.pixelRatio = s.pixelDensity()
         const mouseConstraint = MouseConstraint.create(engine, { mouse })
         World.add(engine.world, mouseConstraint)
 
