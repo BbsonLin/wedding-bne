@@ -1,17 +1,19 @@
 <template>
   <div>
-    <client-only>
-      <vue-p5
-        @preload="preload"
-        @setup="setup"
-        @draw="draw"
-        @keypressed="keyPressed"
-        @mousereleased="mouseReleased"
-        @mousewheel="mouseWheel"
-        @touchended="mouseReleased"
-      ></vue-p5>
-    </client-only>
-    <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio>
+    <div class="h-screen">
+      <client-only>
+        <vue-p5
+          @preload="preload"
+          @setup="setup"
+          @draw="draw"
+          @keypressed="keyPressed"
+          @mousereleased="mouseReleased"
+          @mousewheel="mouseWheel"
+          @touchended="mouseReleased"
+        ></vue-p5>
+      </client-only>
+      <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio>
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,8 @@ const Mouse = Matter.Mouse
 const Events = Matter.Events
 
 const engine = Engine.create()
+const wordsEngine = Engine.create()
+wordsEngine.world.gravity.y = 0.3
 // const bellSound = require('~/assets/audios/church-bell.wav')
 
 export default {
@@ -36,8 +40,12 @@ export default {
       bellSound: null,
       bellImage: null,
       heartImage: null,
+      letterBImage: null,
+      letterEImage: null,
+      letterAndImage: null,
       wordB: null,
       wordE: null,
+      wordAnd: null,
       ball: null,
       bell: null,
       rope: null,
@@ -57,12 +65,17 @@ export default {
 
       // https://www.flaticon.com/free-icon/favourite_3208707?term=heart&page=1&position=20&page=1&position=20&related_id=3208707&origin=search
       this.heartImage = sketch.loadImage(require('~/assets/images/heart.png'))
-      console.log('heartImage', this.heartImage, '~')
+
+      this.letterBImage = sketch.loadImage(require('~/assets/images/b.svg'))
+      this.letterEImage = sketch.loadImage(require('~/assets/images/e.svg'))
+      this.letterAndImage = sketch.loadImage(
+        require('~/assets/images/ampersand.svg')
+      )
     },
     setup(sketch) {
       const sCanvas = sketch.createCanvas(
         sketch.windowWidth,
-        sketch.windowHeight
+        (sketch.windowHeight * 4) / 5
       )
       sketch.background('#abd8e0')
 
@@ -70,18 +83,27 @@ export default {
       this.createSandbox(sketch)
 
       // Words
-      this.wordB = Bodies.rectangle(sketch.width / 2 + 15, -50, 50, 50, {
+      this.wordB = Bodies.rectangle(sketch.width / 2 - 75, -125, 50, 50, {
         restitution: 0.8,
+        angle: -Math.PI * 0.15,
       })
-      this.wordE = Bodies.rectangle(sketch.width / 2, -125, 50, 50, {
+      this.wordE = Bodies.rectangle(sketch.width / 2 + 75, -125, 50, 50, {
         restitution: 0.8,
+        angle: Math.PI * 0.15,
+      })
+      this.wordAnd = Bodies.rectangle(sketch.width / 2, -100, 30, 30, {
+        restitution: 0.8,
+        angle: Math.PI * 0.25,
       })
       Body.setStatic(this.wordB, true)
       Body.setStatic(this.wordE, true)
+      Body.setStatic(this.wordAnd, true)
       this.words.push(this.wordB)
       this.words.push(this.wordE)
-      World.add(engine.world, this.wordB)
-      World.add(engine.world, this.wordE)
+      this.words.push(this.wordAnd)
+      World.add(wordsEngine.world, this.wordB)
+      World.add(wordsEngine.world, this.wordE)
+      World.add(wordsEngine.world, this.wordAnd)
 
       // Ball
       this.ball = Bodies.circle(100, 300, 25)
@@ -132,11 +154,13 @@ export default {
             this.bellSound.play()
             Body.setStatic(this.wordB, false)
             Body.setStatic(this.wordE, false)
+            Body.setStatic(this.wordAnd, false)
           }
         }
       })
 
       Engine.run(engine)
+      Engine.run(wordsEngine)
     },
     draw(sketch) {
       sketch.background('#abd8e0')
@@ -179,6 +203,24 @@ export default {
       }
 
       sketch.imageMode(sketch.CENTER)
+      sketch.push()
+      sketch.translate(this.wordB.position.x, this.wordB.position.y)
+      sketch.rotate(this.wordB.angle)
+      sketch.image(this.letterBImage, 0, 0, 75, 75)
+      sketch.pop()
+
+      sketch.push()
+      sketch.translate(this.wordE.position.x, this.wordE.position.y)
+      sketch.rotate(this.wordE.angle)
+      sketch.image(this.letterEImage, 0, 0, 75, 75)
+      sketch.pop()
+
+      sketch.push()
+      sketch.translate(this.wordAnd.position.x, this.wordAnd.position.y)
+      sketch.rotate(this.wordAnd.angle)
+      sketch.image(this.letterAndImage, 0, 0, 50, 50)
+      sketch.pop()
+
       sketch.image(
         this.heartImage,
         this.ball.position.x,
@@ -224,16 +266,16 @@ export default {
     createSandbox(sketch) {
       const ground = Bodies.rectangle(
         sketch.width / 2,
-        sketch.height + 150,
+        sketch.height,
         sketch.width,
-        300,
+        100,
         {
           isStatic: true,
         }
       )
       const ceiling = Bodies.rectangle(
         sketch.width / 2,
-        -150,
+        -350,
         sketch.width,
         300,
         {
@@ -244,7 +286,7 @@ export default {
         -150,
         sketch.height / 2,
         300,
-        sketch.height,
+        sketch.height + 500,
         {
           isStatic: true,
         }
@@ -253,7 +295,7 @@ export default {
         sketch.width + 150,
         sketch.height / 2,
         300,
-        sketch.height,
+        sketch.height + 500,
         {
           isStatic: true,
         }
@@ -261,6 +303,7 @@ export default {
 
       this.sandBoxes = [ground, ceiling, wallLeft, wallRight]
       World.add(engine.world, this.sandBoxes)
+      World.add(wordsEngine.world, this.sandBoxes)
     },
   },
 }
