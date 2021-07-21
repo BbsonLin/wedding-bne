@@ -7,6 +7,8 @@
         @draw="draw"
         @keypressed="keyPressed"
         @mousereleased="mouseReleased"
+        @mousewheel="mouseWheel"
+        @touchended="mouseReleased"
       ></vue-p5>
     </client-only>
     <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio>
@@ -60,7 +62,7 @@ export default {
     setup(sketch) {
       const sCanvas = sketch.createCanvas(
         sketch.windowWidth,
-        (sketch.windowHeight * 2) / 3
+        sketch.windowHeight
       )
       sketch.background('#abd8e0')
 
@@ -215,6 +217,9 @@ export default {
       setTimeout(() => {
         this.sling.bodyB = null
       }, 70)
+    },
+    mouseWheel(evt) {
+      console.log('mouseWheel :>> ', evt)
     },
     createSandbox(sketch) {
       const ground = Bodies.rectangle(
