@@ -1,19 +1,36 @@
 <template>
-  <div>
-    <div class="h-screen">
-      <client-only>
-        <vue-p5
-          @preload="preload"
-          @setup="setup"
-          @draw="draw"
-          @keypressed="keyPressed"
-          @mousereleased="mouseReleased"
-          @mousewheel="mouseWheel"
-          @touchended="mouseReleased"
-        ></vue-p5>
-      </client-only>
-      <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio>
-    </div>
+  <div class="bg-wedding">
+    <full-page ref="fullpage" :options="options">
+      <section class="section">
+        <div class="h-screen">
+          <vue-p5
+            @preload="preload"
+            @setup="setup"
+            @draw="draw"
+            @keypressed="keyPressed"
+            @mousereleased="mouseReleased"
+            @touchended="mouseReleased"
+          ></vue-p5>
+        </div>
+        <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
+      </section>
+      <section class="section">
+        <div class="h-screen flex justify-center items-center">
+          <iframe
+            width="90%"
+            height="90%"
+            src="https://www.surveycake.com/s/947X1"
+            style="border: #ddd 1px solid"
+            allowTransparency="true"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="h-screen flex justify-center items-center"></div>
+      </section>
+    </full-page>
   </div>
 </template>
 
@@ -54,6 +71,10 @@ export default {
       sandBoxes: [],
       constraints: [],
       words: [],
+
+      options: {
+        afterLoad: this.afterLoad,
+      },
     }
   },
   methods: {
@@ -75,7 +96,8 @@ export default {
     setup(sketch) {
       const sCanvas = sketch.createCanvas(
         sketch.windowWidth,
-        (sketch.windowHeight * 4) / 5
+        sketch.windowHeight
+        // (sketch.windowHeight * 4) / 5
       )
       sketch.background('#abd8e0')
 
@@ -140,7 +162,9 @@ export default {
       /// https://youtu.be/W-ou_sVlTWk?t=386
       mouse.pixelRatio = sketch.pixelDensity()
       const mouseConstraint = MouseConstraint.create(engine, { mouse })
+      const wordsMC = MouseConstraint.create(wordsEngine, { mouse })
       World.add(engine.world, mouseConstraint)
+      World.add(wordsEngine.world, wordsMC)
 
       Events.on(engine, 'collisionStart', (evt) => {
         for (const pair of evt.pairs) {
@@ -196,6 +220,8 @@ export default {
 
       for (const sand of this.sandBoxes) {
         sketch.beginShape()
+        sketch.strokeWeight(0)
+        sketch.fill('#b7dbdb')
         for (const vert of sand.vertices) {
           sketch.vertex(vert.x, vert.y)
         }
@@ -235,8 +261,6 @@ export default {
       sketch.pop()
     },
     keyPressed({ keyCode }) {
-      console.log('keyPressed', keyCode)
-
       if (keyCode === 32) {
         // space
         this.sling.bodyB = this.ball
@@ -254,14 +278,9 @@ export default {
       }
     },
     mouseReleased() {
-      console.log('mouseReleased')
-
       setTimeout(() => {
         this.sling.bodyB = null
       }, 70)
-    },
-    mouseWheel(evt) {
-      console.log('mouseWheel :>> ', evt)
     },
     createSandbox(sketch) {
       const ground = Bodies.rectangle(
@@ -305,6 +324,22 @@ export default {
       World.add(engine.world, this.sandBoxes)
       World.add(wordsEngine.world, this.sandBoxes)
     },
+
+    afterLoad() {
+      console.log("Emitted 'after load' event.")
+    },
   },
 }
 </script>
+
+<style scoped>
+.bg-wedding {
+  background-image: linear-gradient(
+    to bottom,
+    #abd8e0 0%,
+    #d5e3ce 96%,
+    #dddec9 98%,
+    #f7e6ba 100%
+  );
+}
+</style>
