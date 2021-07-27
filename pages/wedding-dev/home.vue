@@ -12,8 +12,42 @@
             @touchended="mouseReleased"
           ></vue-p5>
         </div>
-        <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
       </section>
+      <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
+
+      <section class="section">
+        <div class="h-screen p-4 grid grid-cols-2 gap-4">
+          <div class="h-full w-full bg-white bg-opacity-30"></div>
+          <div class="h-full w-full bg-white bg-opacity-30"></div>
+          <div class="h-full w-full bg-white bg-opacity-30"></div>
+          <div class="row-span-2 h-full w-full bg-white bg-opacity-30">
+            <div
+              ref="aniText"
+              class="text-xl md:text-3xl lg:text-5xl animate-text"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
+              fugiat doloribus perferendis quas? Aperiam asperiores accusantium
+              accusamus unde, soluta molestias consequatur veniam consectetur
+              quos laudantium!
+            </div>
+          </div>
+          <div class="row-span-2 h-full w-full bg-white bg-opacity-30">
+            <img
+              src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
+              alt=""
+            />
+          </div>
+          <div class="h-full w-full bg-white bg-opacity-30"></div>
+          <div class="h-full w-full bg-white bg-opacity-30"></div>
+          <div class="h-full w-full bg-white bg-opacity-30">
+            <img
+              src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80"
+              alt=""
+            />
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="h-screen flex justify-center items-center">
           <iframe
@@ -77,6 +111,7 @@ export default {
       },
     }
   },
+  mounted() {},
   methods: {
     preload(sketch) {
       // this.bellSound = sketch.loadSound('~/assets/audios/church-bell.wav')
@@ -325,8 +360,11 @@ export default {
       World.add(wordsEngine.world, this.sandBoxes)
     },
 
-    afterLoad() {
-      console.log("Emitted 'after load' event.")
+    afterLoad(orig, dest, direct) {
+      console.log("Emitted 'after load' event.", orig, dest, direct)
+      if (dest.index === 1) {
+        this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
+      }
     },
   },
 }
@@ -341,5 +379,12 @@ export default {
     #dddec9 98%,
     #f7e6ba 100%
   );
+}
+
+.animate-text {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 </style>
