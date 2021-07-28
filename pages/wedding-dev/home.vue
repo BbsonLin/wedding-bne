@@ -12,47 +12,50 @@
             @touchended="mouseReleased"
           ></vue-p5>
         </div>
+        <button class="btn-forward" @click="goForward">V</button>
       </section>
       <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
 
       <section class="section">
-        <div class="h-screen p-4 grid grid-cols-2 gap-4">
-          <div class="h-full w-full bg-white bg-opacity-30"></div>
-          <div class="h-full w-full bg-white bg-opacity-30"></div>
-          <div class="h-full w-full bg-white bg-opacity-30"></div>
-          <div class="row-span-2 h-full w-full bg-white bg-opacity-30">
-            <div
-              ref="aniText"
-              class="text-xl md:text-3xl lg:text-5xl animate-text"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-              fugiat doloribus perferendis quas? Aperiam asperiores accusantium
-              accusamus unde, soluta molestias consequatur veniam consectetur
-              quos laudantium!
-            </div>
-          </div>
-          <div class="row-span-2 h-full w-full bg-white bg-opacity-30">
+        <div class="h-screen grid auto-rows-fr gap-2 grid-intro">
+          <div class="h-full w-full grid-item-img-1">
             <img
               src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
               alt=""
             />
           </div>
-          <div class="h-full w-full bg-white bg-opacity-30"></div>
-          <div class="h-full w-full bg-white bg-opacity-30"></div>
-          <div class="h-full w-full bg-white bg-opacity-30">
+
+          <div
+            ref="aniText"
+            class="h-full w-full grid-item-text-1 text-xl animate-text"
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. In nostrum
+            minima quibusdam aliquid natus magnam aspernatur sunt, mollitia eum
+            quos omnis, eos corporis hic? Quae inventore porro suscipit esse
+            quod!
+          </div>
+
+          <div class="h-full w-full grid-item-img-2">
             <img
               src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80"
               alt=""
             />
           </div>
+
+          <div class="h-full w-full grid-item-text-2">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
+            architecto earum ut adipisci laudantium voluptates mollitia voluptas
+            perspiciatis quod illo.
+          </div>
         </div>
       </section>
 
       <section class="section">
-        <div class="h-screen flex justify-center items-center">
+        <div class="h-screen flex flex-col justify-center items-center">
+          <h1 class="text-lg mb-4">Lorem ipsum dolor sit amet.</h1>
           <iframe
             width="90%"
-            height="90%"
+            height="85%"
             src="https://www.surveycake.com/s/947X1"
             style="border: #ddd 1px solid"
             allowTransparency="true"
@@ -362,9 +365,20 @@ export default {
 
     afterLoad(orig, dest, direct) {
       console.log("Emitted 'after load' event.", orig, dest, direct)
+      if (dest.index === 0) {
+        // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
+        this.$nextTick(() => {
+          this.$refs.fullpage.api.setAllowScrolling(false)
+        })
+      }
       if (dest.index === 1) {
         this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
       }
+    },
+
+    goForward() {
+      this.$refs.fullpage.api.setAllowScrolling(true)
+      this.$refs.fullpage.api.moveSectionDown()
     },
   },
 }
@@ -381,10 +395,52 @@ export default {
   );
 }
 
+.grid-intro {
+  grid-template-columns: repeat(3, 1fr) 50px repeat(3, 1fr);
+  grid-template-rows: 100px 50px repeat(4, 1fr);
+}
+
+.grid-item-img-1 {
+  grid-column: 2 / span 2;
+  grid-row: 3 / span 3;
+}
+
+.grid-item-img-2 {
+  grid-column: 5 / span 3;
+  grid-row: 5 / span 2;
+}
+
+.grid-item-text-1 {
+  grid-column: 5 / span 2;
+  grid-row: 3 / span 2;
+}
+
+.grid-item-text-2 {
+  grid-column: 1 / span 3;
+  grid-row: 6;
+  text-align: right;
+}
+
+.btn-forward {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+}
+
 .animate-text {
   opacity: 0;
   transform: translate3d(0, 20px, 0);
   transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
     transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+img {
+  max-height: 100%;
+}
+
+iframe {
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
 }
 </style>
