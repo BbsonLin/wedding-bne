@@ -18,7 +18,7 @@
 
       <section class="section">
         <div class="h-screen grid auto-rows-fr gap-2 grid-intro">
-          <div class="h-full w-full grid-item-img-1">
+          <div v-scroll-animater class="h-full w-full grid-item-img-1">
             <img
               src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
               alt=""
@@ -433,6 +433,18 @@ export default {
   transform: translate3d(0, 20px, 0);
   transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
     transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.before-enter {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enter {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 img {
