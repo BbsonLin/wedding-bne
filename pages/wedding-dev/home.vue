@@ -12,7 +12,7 @@
             @touchended="mouseReleased"
           ></vue-p5>
         </div>
-        <button class="btn-forward" @click="goForward">V</button>
+        <button class="btn-forward" @click="goForward">SKIP</button>
       </section>
       <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
 
@@ -104,6 +104,9 @@ export default {
       bell: null,
       rope: null,
       sling: null,
+      cloudx: 100,
+      cloudy: 75,
+      widthOffset: 0,
       toys: [],
       sandBoxes: [],
       constraints: [],
@@ -137,7 +140,22 @@ export default {
         sketch.windowHeight
         // (sketch.windowHeight * 4) / 5
       )
+      if (sketch.width < 576) this.widthOffset = 100
       sketch.background('#abd8e0')
+
+      Events.on(engine, 'collisionStart', (evt) => {
+        for (const pair of evt.pairs) {
+          // console.log('==========')
+          // console.log(pair.bodyA)
+          // console.log('bell', this.ball)
+          if (pair.bodyA === this.ball && pair.bodyB === this.bell) {
+            this.bellSound.play()
+            Body.setStatic(this.wordB, false)
+            Body.setStatic(this.wordE, false)
+            Body.setStatic(this.wordAnd, false)
+          }
+        }
+      })
 
       //
       this.createSandbox(sketch)
@@ -166,20 +184,28 @@ export default {
       World.add(wordsEngine.world, this.wordAnd)
 
       // Ball
-      this.ball = Bodies.circle(100, 300, 25)
+      this.ball = Bodies.circle(10, 150, 20, { restitution: 0.3 })
       this.toys.push(this.ball)
       World.add(engine.world, this.ball)
 
-      // // Bell
-      this.bell = Bodies.rectangle(sketch.width - 150, 250, 25, 70)
+      // Bell
+      this.bell = Bodies.rectangle(
+        sketch.width - 150 + this.widthOffset,
+        sketch.height - 300,
+        25,
+        35
+      )
       this.toys.push(this.bell)
       World.add(engine.world, this.bell)
 
       // // Rope
       this.rope = Constraint.create({
-        pointA: { x: sketch.width - 150, y: 100 },
+        pointA: {
+          x: sketch.width - 155 + this.widthOffset,
+          y: sketch.height - 370,
+        },
         bodyB: this.bell,
-        length: 100,
+        length: 70,
         stiffness: 0.75,
       })
       this.constraints.push(this.rope)
@@ -187,7 +213,7 @@ export default {
 
       // Sling
       this.sling = Constraint.create({
-        pointA: { x: 300, y: sketch.height - 150 },
+        pointA: { x: 125, y: sketch.height - 150 },
         bodyB: this.ball,
         length: 0,
         stiffness: 0.05,
@@ -204,29 +230,33 @@ export default {
       World.add(engine.world, mouseConstraint)
       World.add(wordsEngine.world, wordsMC)
 
-      Events.on(engine, 'collisionStart', (evt) => {
-        for (const pair of evt.pairs) {
-          // console.log('==========')
-          // console.log(pair.bodyA)
-          // console.log('bell', this.ball)
-          if (pair.bodyA === this.ball && pair.bodyB === this.bell) {
-            // const sound = new Audio(this.bellSound)
-            // console.log(pair.bodyB)
-            // console.log(pair.bodyB.angle)
-            this.bellSound.play()
-            Body.setStatic(this.wordB, false)
-            Body.setStatic(this.wordE, false)
-            Body.setStatic(this.wordAnd, false)
-          }
-        }
-      })
-
       Engine.run(engine)
       Engine.run(wordsEngine)
     },
     draw(sketch) {
       sketch.background('#abd8e0')
       // sketch.ellipse(sketch.mouseX, sketch.mouseY, 20, 20)
+
+      sketch.fill('Salmon')
+      sketch.textSize(16)
+      sketch.textAlign(sketch.CENTER)
+      sketch.text(
+        '(' +
+          sketch.floor(sketch.mouseX) +
+          ', ' +
+          sketch.floor(sketch.mouseY) +
+          ')',
+        sketch.mouseX,
+        sketch.mouseY
+      )
+
+      this.createChurch(
+        sketch,
+        sketch.width - 250 + this.widthOffset,
+        sketch.windowHeight - 150
+      )
+
+      sketch.fill('white')
 
       for (const cons of this.constraints) {
         const pA = cons.pointA
@@ -289,14 +319,20 @@ export default {
         this.heartImage,
         this.ball.position.x,
         this.ball.position.y,
-        50,
-        50
+        35,
+        35
       )
       sketch.push()
       sketch.translate(this.bell.position.x, this.bell.position.y)
       sketch.rotate(this.bell.angle)
-      sketch.image(this.bellImage, 0, 0, 75, 75)
+      sketch.image(this.bellImage, 0, 0, 50, 50)
       sketch.pop()
+
+      this.createCloud(sketch, this.cloudx, this.cloudy - 25)
+      this.createCloud(sketch, this.cloudx + 150, this.cloudy + 25)
+      this.createCloud(sketch, this.cloudx + 500, this.cloudy)
+      this.cloudx += 0.25
+      if (this.cloudx > sketch.windowWidth + 100) this.cloudx = -500
     },
     keyPressed({ keyCode }) {
       if (keyCode === 32) {
@@ -361,6 +397,29 @@ export default {
       this.sandBoxes = [ground, ceiling, wallLeft, wallRight]
       World.add(engine.world, this.sandBoxes)
       World.add(wordsEngine.world, this.sandBoxes)
+    },
+    createChurch(sketch, baseX, baseY) {
+      // Base
+      sketch.push()
+      sketch.fill('pink')
+      sketch.stroke('white')
+      sketch.strokeWeight(5)
+      sketch.rect(baseX - 5, baseY, 210, 100)
+      sketch.arc(baseX + 100, baseY, 200, 200, -sketch.PI, 0)
+      sketch.rect(baseX + 50, baseY - 105, 100, 20)
+
+      sketch.line(baseX + 80, baseY - 200, baseX + 110, baseY - 200) // line(x1, y1, x2, y2)
+      sketch.line(baseX + 95, baseY - 180, baseX + 95, baseY - 210)
+      sketch.pop()
+    },
+    createCloud(sketch, cloudx, cloudy) {
+      sketch.push()
+      sketch.fill(250)
+      sketch.noStroke()
+      sketch.ellipse(cloudx, cloudy, 70, 50)
+      sketch.ellipse(cloudx + 10, cloudy + 10, 70, 50)
+      sketch.ellipse(cloudx - 20, cloudy + 10, 70, 50)
+      sketch.pop()
     },
 
     afterLoad(orig, dest, direct) {
