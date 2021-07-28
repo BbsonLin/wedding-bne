@@ -2,7 +2,7 @@
   <div class="bg-wedding">
     <full-page ref="fullpage" :options="options">
       <section class="section">
-        <div class="h-screen">
+        <div class="h-full">
           <vue-p5
             @preload="preload"
             @setup="setup"
@@ -483,7 +483,7 @@ export default {
 .btn-forward {
   position: absolute;
   left: 50%;
-  bottom: 1rem;
+  top: calc(100% - 3.25rem);
   transform: translateX(-50%);
 }
 
