@@ -1,20 +1,22 @@
 import Vue from 'vue'
 
-const animatedScrollObserver = new IntersectionObserver(
-  (entries, animatedScrollObserver) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('enter')
-        animatedScrollObserver.unobserve(entry.target)
-      }
-    })
-  }
-)
-
 // https://youtu.be/NVgNUXsXn-s
 Vue.directive('scroll-animater', {
-  bind(el) {
-    el.classList.add('before-enter')
-    animatedScrollObserver.observe(el)
+  bind(el, binding) {
+    console.log('scroll-animater binding :>> ', binding)
+    const defaultAnimationName = 'enter'
+
+    if (binding.value) el.classList.add(`before-${binding.value}`)
+    else el.classList.add(`before-${defaultAnimationName}`)
+    const asObserver = new IntersectionObserver((entries, asObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (binding.value) entry.target.classList.add(`${binding.value}`)
+          else entry.target.classList.add(defaultAnimationName)
+          asObserver.unobserve(entry.target)
+        }
+      })
+    })
+    asObserver.observe(el)
   },
 })

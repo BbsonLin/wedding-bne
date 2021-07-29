@@ -18,7 +18,10 @@
 
       <section class="section">
         <div class="h-screen grid auto-rows-fr gap-2 grid-intro">
-          <div v-scroll-animater class="h-full w-full grid-item-img-1">
+          <div
+            v-scroll-animater="'fadein-up'"
+            class="h-full w-full grid-item-img-1"
+          >
             <img
               src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
               alt=""
@@ -26,8 +29,8 @@
           </div>
 
           <div
-            ref="aniText"
-            class="h-full w-full grid-item-text-1 text-xl animate-text"
+            v-scroll-animater="'fadein-right'"
+            class="h-full w-full grid-item-text-1 text-xl"
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. In nostrum
             minima quibusdam aliquid natus magnam aspernatur sunt, mollitia eum
@@ -35,14 +38,20 @@
             quod!
           </div>
 
-          <div class="h-full w-full grid-item-img-2">
+          <div
+            v-scroll-animater="'fadein-up'"
+            class="h-full w-full grid-item-img-2"
+          >
             <img
               src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80"
               alt=""
             />
           </div>
 
-          <div class="h-full w-full grid-item-text-2">
+          <div
+            v-scroll-animater="'fadein-left'"
+            class="h-full w-full grid-item-text-2"
+          >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
             architecto earum ut adipisci laudantium voluptates mollitia voluptas
             perspiciatis quod illo.
@@ -430,9 +439,9 @@ export default {
           this.$refs.fullpage.api.setAllowScrolling(false)
         })
       }
-      if (dest.index === 1) {
-        this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
-      }
+      // if (dest.index === 1) {
+      //   this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
+      // }
     },
 
     goForward() {
@@ -494,14 +503,38 @@ export default {
     transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.before-enter {
+.before-fadein-up {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fadein-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.before-fadein-right {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fadein-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.before-fadein-left {
   opacity: 0;
   transform: translateX(-100px);
   transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1),
     transform 2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.enter {
+.fadein-left {
   opacity: 1;
   transform: translateX(0);
 }
