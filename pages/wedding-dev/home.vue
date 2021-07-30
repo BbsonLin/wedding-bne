@@ -60,13 +60,24 @@
       </section>
 
       <section class="section">
-        <div class="h-screen flex flex-col justify-center items-center">
-          <h1 class="text-lg mb-4">Lorem ipsum dolor sit amet.</h1>
+        <div class="absolute card w-full h-full">
+          <div
+            v-scroll-animater="'card-flip-left'"
+            class="card-front flex flex-col items-center p-8"
+          >
+            <div class="text-3xl mt-8">Lorem ipsum</div>
+            <div class="text-xl">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Similique quis et minima possimus consectetur dolorum quibusdam
+              dolorem, voluptatibus aliquam quae natus? Quas repellendus
+              architecto mollitia voluptatibus molestiae dolor quisquam
+              temporibus.
+            </div>
+          </div>
           <iframe
-            width="90%"
-            height="85%"
+            v-scroll-animater="'card-flip-right'"
+            class="card-back"
             src="https://www.surveycake.com/s/947X1"
-            style="border: #ddd 1px solid"
             allowTransparency="true"
             frameborder="0"
           ></iframe>
@@ -541,6 +552,45 @@ export default {
 
 img {
   max-height: 100%;
+}
+
+.card {
+  top: 60%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  perspective: 1600px;
+  transition: 0.5s;
+}
+
+.card-front {
+  height: 80%;
+  width: 90%;
+  background-color: #efe9e9;
+  backface-visibility: hidden;
+  transform: rotateY(0deg);
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1) 2s;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+}
+
+.card-back {
+  height: 80%;
+  width: 90%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1) 2s;
+}
+
+.card-flip-left {
+  transform: rotateY(-180deg);
+}
+
+.card-flip-right {
+  transform: rotateY(0deg);
 }
 
 iframe {
