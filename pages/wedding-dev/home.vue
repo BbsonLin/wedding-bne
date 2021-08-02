@@ -149,6 +149,7 @@ export default {
       sandBoxes: [],
       constraints: [],
       words: [],
+      balls: [],
 
       options: {
         afterLoad: this.afterLoad,
@@ -189,9 +190,20 @@ export default {
       Events.on(engine, 'collisionStart', (evt) => {
         for (const pair of evt.pairs) {
           // console.log('==========')
-          // console.log(pair.bodyA)
-          // console.log('bell', this.ball)
-          if (pair.bodyA === this.ball && pair.bodyB === this.bell) {
+          // console.log(pair.bodyA, pair.bodyB)
+          // console.log(pair.bodyA === this.bell, pair.bodyB === this.bell)
+          // console.log('balls', this.balls)
+          if (this.balls.includes(pair.bodyA) && pair.bodyB === this.bell) {
+            // print(pair.bodyB)
+            // print(pair.bodyB.angle)
+            this.bellSound.play()
+            Body.setStatic(this.wordB, false)
+            Body.setStatic(this.wordE, false)
+            Body.setStatic(this.wordAnd, false)
+          } else if (
+            this.balls.includes(pair.bodyB) &&
+            pair.bodyA === this.bell
+          ) {
             this.bellSound.play()
             Body.setStatic(this.wordB, false)
             Body.setStatic(this.wordE, false)
@@ -227,8 +239,16 @@ export default {
       World.add(wordsEngine.world, this.wordAnd)
 
       // Ball
-      this.ball = Bodies.circle(10, 150, 20, { restitution: 0.3 })
-      this.toys.push(this.ball)
+      this.ball = Bodies.circle(
+        200 - this.widthOffset,
+        sketch.height - 100,
+        20,
+        {
+          restitution: 0.3,
+        }
+      )
+      this.balls.push(this.ball)
+      // this.toys.push(this.ball)
       World.add(engine.world, this.ball)
 
       // Bell
@@ -256,7 +276,7 @@ export default {
 
       // Sling
       this.sling = Constraint.create({
-        pointA: { x: 125, y: sketch.height - 150 },
+        pointA: { x: 200 - this.widthOffset, y: sketch.height - 150 },
         bodyB: this.ball,
         length: 0,
         stiffness: 0.05,
@@ -313,21 +333,21 @@ export default {
         }
       }
 
-      for (const w of this.words) {
-        sketch.beginShape()
-        for (const vert of w.vertices) {
-          sketch.vertex(vert.x, vert.y)
-        }
-        sketch.endShape(sketch.CLOSE)
-      }
+      // for (const w of this.words) {
+      //   sketch.beginShape()
+      //   for (const vert of w.vertices) {
+      //     sketch.vertex(vert.x, vert.y)
+      //   }
+      //   sketch.endShape(sketch.CLOSE)
+      // }
 
-      for (const t of this.toys) {
-        sketch.beginShape()
-        for (const vert of t.vertices) {
-          sketch.vertex(vert.x, vert.y)
-        }
-        sketch.endShape(sketch.CLOSE)
-      }
+      // for (const t of this.toys) {
+      //   sketch.beginShape()
+      //   for (const vert of t.vertices) {
+      //     sketch.vertex(vert.x, vert.y)
+      //   }
+      //   sketch.endShape(sketch.CLOSE)
+      // }
 
       for (const sand of this.sandBoxes) {
         sketch.beginShape()
@@ -337,6 +357,16 @@ export default {
           sketch.vertex(vert.x, vert.y)
         }
         sketch.endShape(sketch.CLOSE)
+      }
+
+      for (const b of this.balls) {
+        sketch.beginShape()
+        // sketch.fill('#fff')
+        for (const vert of b.vertices) {
+          sketch.vertex(vert.x, vert.y)
+        }
+        sketch.endShape(sketch.CLOSE)
+        sketch.image(this.heartImage, b.position.x, b.position.y, 35, 35)
       }
 
       sketch.imageMode(sketch.CENTER)
@@ -358,13 +388,13 @@ export default {
       sketch.image(this.letterAndImage, 0, 0, 50, 50)
       sketch.pop()
 
-      sketch.image(
-        this.heartImage,
-        this.ball.position.x,
-        this.ball.position.y,
-        35,
-        35
-      )
+      // sketch.image(
+      //   this.heartImage,
+      //   this.ball.position.x,
+      //   this.ball.position.y,
+      //   35,
+      //   35
+      // )
       sketch.push()
       sketch.translate(this.bell.position.x, this.bell.position.y)
       sketch.rotate(this.bell.angle)
@@ -379,8 +409,19 @@ export default {
     },
     keyPressed({ keyCode }) {
       if (keyCode === 32) {
+        console.log('keyCode :>> ', keyCode)
         // space
-        this.sling.bodyB = this.ball
+        // this.sling.bodyB = this.ball
+        // eslint-disable-next-line prefer-const
+        let newBall = Bodies.circle(
+          200 - this.widthOffset,
+          window.innerHeight - 100,
+          15,
+          { restitution: 0.3 }
+        )
+        this.balls.push(newBall)
+        World.add(engine.world, newBall)
+        this.sling.bodyB = newBall
       }
 
       if (keyCode === 83) {
