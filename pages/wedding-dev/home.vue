@@ -16,11 +16,37 @@
       </section>
       <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
 
-      <section class="section">
-        <div class="h-screen grid auto-rows-fr gap-2 grid-intro">
+      <section id="intro" class="section">
+        <div class="h-screen grid grid-cols-8 grid-rows-6 gap-2">
+          <div
+            class="
+              h-full
+              w-full
+              p-4
+              flex
+              items-center
+              col-span-full
+              row-start-1
+              md:col-start-1 md:col-span-4
+              md:row-start-1 md:row-span-3
+            "
+          >
+            <p v-scroll-animater="'fadein-left'" class="text-5xl md:text-right">
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+
           <div
             v-scroll-animater="'fadein-up'"
-            class="h-full w-full grid-item-img-1"
+            class="
+              h-full
+              w-full
+              pt-8
+              col-span-full
+              row-start-2
+              md:col-start-5 md:col-span-4
+              md:row-span-full
+            "
           >
             <img
               src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
@@ -29,28 +55,20 @@
           </div>
 
           <div
-            v-scroll-animater="'fadein-right'"
-            class="h-full w-full grid-item-text-1 text-xl"
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. In nostrum
-            minima quibusdam aliquid natus magnam aspernatur sunt, mollitia eum
-            quos omnis, eos corporis hic? Quae inventore porro suscipit esse
-            quod!
-          </div>
-
-          <div
-            v-scroll-animater="'fadein-up'"
-            class="h-full w-full grid-item-img-2"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80"
-              alt=""
-            />
-          </div>
-
-          <div
             v-scroll-animater="'fadein-left'"
-            class="h-full w-full grid-item-text-2"
+            class="
+              h-full
+              w-full
+              p-2
+              col-start-3 col-end-[-1]
+              row-start-5 row-end-[-1]
+              md:col-start-2 md:col-span-4
+              md:row-start-4 md:row-span-2
+              bg-white bg-opacity-70
+              rounded
+              text-xl
+              md:text-right
+            "
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
             architecto earum ut adipisci laudantium voluptates mollitia voluptas
@@ -134,6 +152,7 @@ export default {
 
       options: {
         afterLoad: this.afterLoad,
+        onLeave: this.onLeave,
         navigation: true,
         navigationPosition: 'left',
         navigationTooltips: ['Bobson & Elva', 'Intro', 'RSVP', 'Thanks'],
@@ -458,6 +477,11 @@ export default {
       //   this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
       // }
     },
+    onLeave(orig, dest, direct) {
+      if (orig.isFirst) {
+        this.$refs.fullpage.api.setAllowScrolling(true)
+      }
+    },
 
     goForward() {
       this.$refs.fullpage.api.setAllowScrolling(true)
@@ -486,30 +510,10 @@ export default {
   color: black;
 }
 
-.grid-intro {
-  grid-template-columns: repeat(3, 1fr) 50px repeat(3, 1fr);
-  grid-template-rows: 100px 50px repeat(4, 1fr);
-}
-
-.grid-item-img-1 {
-  grid-column: 2 / span 2;
-  grid-row: 3 / span 3;
-}
-
-.grid-item-img-2 {
-  grid-column: 5 / span 3;
-  grid-row: 5 / span 2;
-}
-
-.grid-item-text-1 {
-  grid-column: 5 / span 2;
-  grid-row: 3 / span 2;
-}
-
-.grid-item-text-2 {
-  grid-column: 1 / span 3;
-  grid-row: 6;
-  text-align: right;
+@media (min-width: 768px) {
+  #intro img {
+    max-width: inherit;
+  }
 }
 
 .btn-forward {
@@ -560,10 +564,6 @@ export default {
 .fadein-left {
   opacity: 1;
   transform: translateX(0);
-}
-
-img {
-  max-height: 100%;
 }
 
 .card {
