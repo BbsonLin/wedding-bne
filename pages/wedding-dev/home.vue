@@ -134,6 +134,10 @@ export default {
 
       options: {
         afterLoad: this.afterLoad,
+        navigation: true,
+        navigationPosition: 'left',
+        navigationTooltips: ['Bobson & Elva', 'Intro', 'RSVP', 'Thanks'],
+        showActiveTooltip: true,
       },
     }
   },
@@ -472,6 +476,14 @@ export default {
     #dddec9 98%,
     #f7e6ba 100%
   );
+}
+
+#fp-nav ul li a span {
+  background: #efe9e9;
+}
+
+#fp-nav ul li .fp-tooltip {
+  color: black;
 }
 
 .grid-intro {
