@@ -241,14 +241,14 @@ export default {
       this.toys.push(this.bell)
       World.add(engine.world, this.bell)
 
-      // // Rope
+      // Rope
       this.rope = Constraint.create({
         pointA: {
           x: sketch.width - 155 + this.widthOffset,
-          y: sketch.height - 370,
+          y: sketch.height - 330,
         },
         bodyB: this.bell,
-        length: 70,
+        length: 45,
         stiffness: 0.75,
       })
       this.constraints.push(this.rope)
@@ -306,7 +306,7 @@ export default {
         if (cons.bodyB) {
           const pB = cons.bodyB.position
           sketch.push()
-          sketch.stroke('white')
+          sketch.stroke('#91aaaf')
           sketch.strokeWeight(2)
           sketch.line(pA.x, pA.y, pB.x, pB.y)
           sketch.pop()
@@ -442,17 +442,67 @@ export default {
       World.add(wordsEngine.world, this.sandBoxes)
     },
     createChurch(sketch, baseX, baseY) {
-      // Base
       sketch.push()
+      // Base
       sketch.fill('pink')
       sketch.stroke('white')
       sketch.strokeWeight(5)
       sketch.rect(baseX - 5, baseY, 210, 100)
+
+      // Second Floor
       sketch.arc(baseX + 100, baseY, 200, 200, -sketch.PI, 0)
       sketch.rect(baseX + 50, baseY - 105, 100, 20)
 
-      sketch.line(baseX + 80, baseY - 200, baseX + 110, baseY - 200) // line(x1, y1, x2, y2)
-      sketch.line(baseX + 95, baseY - 180, baseX + 95, baseY - 210)
+      // Roof
+      sketch.strokeWeight(3)
+      sketch.rect(baseX + 53, baseY - 165, 15, 60)
+      sketch.rect(baseX + 128, baseY - 165, 15, 60)
+
+      // Roof Arc
+      sketch.strokeWeight(8)
+      sketch.noFill()
+      sketch.arc(baseX + 98, baseY - 168, 60, 30, -sketch.PI, 0)
+
+      // Cross
+      sketch.strokeWeight(5)
+      sketch.line(baseX + 80, baseY - 210, baseX + 110, baseY - 210) // line(x1, y1, x2, y2)
+      sketch.line(baseX + 95, baseY - 180, baseX + 95, baseY - 220)
+
+      // Door
+      this.createChurchDoor(sketch, baseX + 60, baseY + 25)
+
+      // Window
+      this.createChurchWindow(sketch, baseX + 65, baseY - 60)
+
+      sketch.pop()
+    },
+    createChurchDoor(sketch, baseX, baseY) {
+      sketch.push()
+      sketch.fill('#057dba')
+      sketch.rect(baseX, baseY, 50, 75)
+
+      sketch.fill('#91aaaf')
+      sketch.strokeWeight(1)
+      sketch.rect(baseX + 5, baseY + 5, 15, 30)
+      sketch.rect(baseX + 30, baseY + 5, 15, 30)
+
+      sketch.rect(baseX + 5, baseY + 40, 15, 25)
+      sketch.rect(baseX + 30, baseY + 40, 15, 25)
+
+      sketch.stroke('#2a384e')
+      sketch.line(baseX + 25, baseY + 5, baseX + 25, baseY + 70)
+      sketch.pop()
+    },
+    createChurchWindow(sketch, baseX, baseY) {
+      sketch.push()
+      sketch.fill('#5a6b6e')
+      sketch.strokeWeight(1)
+      sketch.rect(baseX, baseY, 40, 50)
+
+      sketch.stroke('white')
+      sketch.strokeWeight(2)
+      sketch.line(baseX + 20, baseY, baseX + 20, baseY + 50)
+      sketch.line(baseX, baseY + 25, baseX + 40, baseY + 25)
       sketch.pop()
     },
     createCloud(sketch, cloudx, cloudy) {
@@ -471,6 +521,7 @@ export default {
         // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
         this.$nextTick(() => {
           this.$refs.fullpage.api.setAllowScrolling(false)
+          this.$refs.fullpage.api.setKeyboardScrolling(false)
         })
       }
       // if (dest.index === 1) {
