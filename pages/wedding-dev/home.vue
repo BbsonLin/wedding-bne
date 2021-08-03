@@ -12,7 +12,7 @@
             @touchended="mouseReleased"
           ></vue-p5>
         </div>
-        <button class="btn-forward" @click="goForward">SKIP</button>
+        <button class="btn-forward px-2 py-4" @click="goForward">SKIP</button>
       </section>
       <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
 
@@ -37,21 +37,23 @@
           </div>
 
           <div
+            id="intro-image"
             v-scroll-animater="'fadein-up'"
             class="
               h-full
               w-full
               pt-8
               col-span-full
-              row-start-2
+              row-start-2 row-end-[-1]
               md:col-start-5 md:col-span-4
               md:row-span-full
             "
           >
-            <img
+            <!-- <img
+              class="h-full"
               src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
               alt=""
-            />
+            /> -->
           </div>
 
           <div
@@ -78,32 +80,25 @@
       </section>
 
       <section class="section">
-        <div class="absolute card w-full h-full">
-          <div
-            v-scroll-animater="'card-flip-left'"
-            class="card-front flex flex-col items-center p-8"
-          >
-            <div class="text-3xl mt-8">Lorem ipsum</div>
-            <div class="text-xl">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Similique quis et minima possimus consectetur dolorum quibusdam
-              dolorem, voluptatibus aliquam quae natus? Quas repellendus
-              architecto mollitia voluptatibus molestiae dolor quisquam
-              temporibus.
-            </div>
+        <div class="w-full h-full flex flex-col justify-center items-center">
+          <div class="mt-8 text-5xl">RSVP</div>
+          <div class="w-2/3 mb-5 text-xl">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique
+            quis et minima possimus consectetur dolorum quibusdam dolorem,
           </div>
           <iframe
-            v-scroll-animater="'card-flip-right'"
-            class="card-back"
+            v-scroll-animater="'fadein-up'"
             src="https://www.surveycake.com/s/947X1"
             allowTransparency="true"
             frameborder="0"
+            height="80%"
+            width="90%"
           ></iframe>
         </div>
       </section>
 
       <section class="section">
-        <div class="h-screen flex justify-center items-center"></div>
+        <div class="h-full flex justify-center items-center"></div>
       </section>
     </full-page>
   </div>
@@ -602,16 +597,16 @@ export default {
   color: black;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   #intro img {
     max-width: inherit;
   }
-}
+} */
 
 .btn-forward {
   position: absolute;
   left: 50%;
-  top: calc(100% - 3.25rem);
+  top: calc(100% - 4.5rem);
   transform: translateX(-50%);
 }
 
@@ -658,43 +653,10 @@ export default {
   transform: translateX(0);
 }
 
-.card {
-  top: 60%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-  perspective: 1600px;
-  transition: 0.5s;
-}
-
-.card-front {
-  height: 80%;
-  width: 90%;
-  background-color: #efe9e9;
-  backface-visibility: hidden;
-  transform: rotateY(0deg);
-  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1) 2s;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
-}
-
-.card-back {
-  height: 80%;
-  width: 90%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
-  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1) 2s;
-}
-
-.card-flip-left {
-  transform: rotateY(-180deg);
-}
-
-.card-flip-right {
-  transform: rotateY(0deg);
+#intro-image {
+  background-image: url('https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 iframe {
