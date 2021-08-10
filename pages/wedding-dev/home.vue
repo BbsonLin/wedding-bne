@@ -1,106 +1,107 @@
 <template>
   <div class="bg-wedding">
-    <full-page ref="fullpage" :options="options">
-      <section class="section">
-        <div class="h-full">
-          <vue-p5
-            @preload="preload"
-            @setup="setup"
-            @draw="draw"
-            @keypressed="keyPressed"
-            @mousereleased="mouseReleased"
-            @touchended="mouseReleased"
-          ></vue-p5>
-        </div>
-        <button class="btn-forward px-2 py-4" @click="goForward">SKIP</button>
-      </section>
-      <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
-
-      <section id="intro" class="section">
-        <div class="h-screen grid grid-cols-8 grid-rows-6 gap-2">
-          <div
-            class="
-              h-full
-              w-full
-              p-4
-              flex
-              items-center
-              col-span-full
-              row-start-1
-              md:col-start-1 md:col-span-4
-              md:row-start-1 md:row-span-3
-            "
-          >
-            <p v-scroll-animater="'fadein-left'" class="text-5xl md:text-right">
-              Lorem ipsum dolor sit amet.
-            </p>
+    <no-ssr>
+      <full-page ref="fullpage" :options="options">
+        <section class="section">
+          <div class="h-full">
+            <vue-p5
+              @preload="preload"
+              @setup="setup"
+              @draw="draw"
+              @keypressed="keyPressed"
+              @mousereleased="mouseReleased"
+              @touchended="mouseReleased"
+            ></vue-p5>
           </div>
-
-          <div
-            id="intro-image"
-            v-scroll-animater="'fadein-up'"
-            class="
-              h-full
-              w-full
-              pt-8
-              col-span-full
-              row-start-2 row-end-[-1]
-              md:col-start-5 md:col-span-4
-              md:row-span-full
-            "
-          >
-            <!-- <img
-              class="h-full"
-              src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
-              alt=""
-            /> -->
+          <button class="btn-forward px-2 py-4" @click="goForward">SKIP</button>
+        </section>
+        <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
+        <section id="intro" class="section">
+          <div class="h-screen grid grid-cols-8 grid-rows-6 gap-2">
+            <div
+              class="
+                h-full
+                w-full
+                p-4
+                flex
+                items-center
+                col-span-full
+                row-start-1
+                md:col-start-1 md:col-span-4
+                md:row-start-1 md:row-span-3
+              "
+            >
+              <p
+                v-scroll-animater="'fadein-left'"
+                class="text-5xl md:text-right"
+              >
+                Lorem ipsum dolor sit amet.
+              </p>
+            </div>
+            <div
+              id="intro-image"
+              v-scroll-animater="'fadein-up'"
+              class="
+                h-full
+                w-full
+                pt-8
+                col-span-full
+                row-start-2 row-end-[-1]
+                md:col-start-5 md:col-span-4
+                md:row-span-full
+              "
+            >
+              <!-- <img
+                class="h-full"
+                src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
+                alt=""
+              /> -->
+            </div>
+            <div
+              v-scroll-animater="'fadein-left'"
+              class="
+                h-full
+                w-full
+                p-2
+                col-start-3 col-end-[-1]
+                row-start-5 row-end-[-1]
+                md:col-start-2 md:col-span-4
+                md:row-start-4 md:row-span-2
+                bg-white bg-opacity-70
+                rounded
+                text-xl
+                md:text-right
+              "
+            >
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
+              architecto earum ut adipisci laudantium voluptates mollitia
+              voluptas perspiciatis quod illo.
+            </div>
           </div>
-
-          <div
-            v-scroll-animater="'fadein-left'"
-            class="
-              h-full
-              w-full
-              p-2
-              col-start-3 col-end-[-1]
-              row-start-5 row-end-[-1]
-              md:col-start-2 md:col-span-4
-              md:row-start-4 md:row-span-2
-              bg-white bg-opacity-70
-              rounded
-              text-xl
-              md:text-right
-            "
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-            architecto earum ut adipisci laudantium voluptates mollitia voluptas
-            perspiciatis quod illo.
+        </section>
+        <section class="section">
+          <div class="w-full h-full flex flex-col justify-center items-center">
+            <div class="mt-8 text-5xl">RSVP</div>
+            <div class="w-2/3 mb-5 text-xl">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Similique quis et minima possimus consectetur dolorum quibusdam
+              dolorem,
+            </div>
+            <iframe
+              v-scroll-animater="'fadein-up'"
+              src="https://www.surveycake.com/s/947X1"
+              allowTransparency="true"
+              frameborder="0"
+              height="80%"
+              width="90%"
+            ></iframe>
           </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="w-full h-full flex flex-col justify-center items-center">
-          <div class="mt-8 text-5xl">RSVP</div>
-          <div class="w-2/3 mb-5 text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique
-            quis et minima possimus consectetur dolorum quibusdam dolorem,
-          </div>
-          <iframe
-            v-scroll-animater="'fadein-up'"
-            src="https://www.surveycake.com/s/947X1"
-            allowTransparency="true"
-            frameborder="0"
-            height="80%"
-            width="90%"
-          ></iframe>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="h-full flex justify-center items-center"></div>
-      </section>
-    </full-page>
+        </section>
+        <section class="section">
+          <div class="h-full flex justify-center items-center"></div>
+        </section>
+      </full-page>
+    </no-ssr>
   </div>
 </template>
 
