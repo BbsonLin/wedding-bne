@@ -296,18 +296,19 @@ export default {
       sketch.background('#abd8e0')
       // sketch.ellipse(sketch.mouseX, sketch.mouseY, 20, 20)
 
-      sketch.fill('Salmon')
-      sketch.textSize(16)
-      sketch.textAlign(sketch.CENTER)
-      sketch.text(
-        '(' +
-          sketch.floor(sketch.mouseX) +
-          ', ' +
-          sketch.floor(sketch.mouseY) +
-          ')',
-        sketch.mouseX,
-        sketch.mouseY
-      )
+      // Draw mouse pointer
+      // sketch.fill('Salmon')
+      // sketch.textSize(16)
+      // sketch.textAlign(sketch.CENTER)
+      // sketch.text(
+      //   '(' +
+      //     sketch.floor(sketch.mouseX) +
+      //     ', ' +
+      //     sketch.floor(sketch.mouseY) +
+      //     ')',
+      //   sketch.mouseX,
+      //   sketch.mouseY
+      // )
 
       this.createChurch(
         sketch,

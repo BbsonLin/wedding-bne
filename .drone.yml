@@ -17,14 +17,18 @@ steps:
     script:
       - cd /var/lib/BnEs
       - git checkout main && git pull
+      - echo "=== Checkout docker images ==="
       - docker images
       - docker build -t bne-main-ws .
+      - echo "=== Checkout docker images ==="
       - docker images
       - cd ../bne.tw/docker/
+      - echo "=== Checkout docker containers ==="
       - docker ps -a
       - docker-compose down
       - docker-compose up -d
       - echo "Sleep 5 secs, then show containers..."
+      - echo "=== Checkout docker containers ==="
       - sleep 5 && docker ps -a
 
 # ---
