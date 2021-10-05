@@ -33,9 +33,9 @@
             >
               <p
                 v-scroll-animater="'fadein-left'"
-                class="text-5xl md:text-right"
+                class="text-4xl md:text-5xl pt-5 md:pt-0 md:pl-4 md:text-right"
               >
-                Lorem ipsum dolor sit amet.
+                We are getting married.
               </p>
             </div>
             <div
@@ -67,38 +67,71 @@
                 row-start-5 row-end-[-1]
                 md:col-start-2 md:col-span-4
                 md:row-start-4 md:row-span-2
+                md:flex md:flex-col
+                md:justify-center
                 bg-white bg-opacity-70
                 rounded
                 text-xl
-                md:text-right
+                md:text-left
               "
             >
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-              architecto earum ut adipisci laudantium voluptates mollitia
-              voluptas perspiciatis quod illo.
+              <p class="py-0 md:py-2 text-lg md:text-2xl">Date: 2021/10/16</p>
+              <p class="py-0 md:py-2 text-lg md:text-2xl">Time: 14:00 PM</p>
+              <p class="py-0 md:py-2 text-lg md:text-2xl">
+                Location:
+                <a
+                  class="text-indigo-700 hover:text-indigo-500 cursor-pointer"
+                  @click="goForward"
+                >
+                  新北市林口區文化二路一段266號5樓之2(林口浸信會)
+                </a>
+              </p>
             </div>
           </div>
         </section>
         <section class="section">
           <div class="w-full h-full flex flex-col justify-center items-center">
-            <div class="mt-8 text-5xl">RSVP</div>
-            <div class="w-2/3 mb-5 text-xl">
+            <div class="mt-8 mb-4 text-5xl">Location</div>
+            <!-- <div class="w-2/3 mb-5 text-xl">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Similique quis et minima possimus consectetur dolorum quibusdam
               dolorem,
-            </div>
-            <iframe
+            </div> -->
+            <!-- <iframe
               v-scroll-animater="'fadein-up'"
               src="https://www.surveycake.com/s/947X1"
               allowTransparency="true"
               frameborder="0"
               height="80%"
               width="90%"
+            ></iframe> -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.8408151080453!2d121.37079341489658!3d25.07338394286574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a6df26d9659d%3A0xb247253f6c483b8d!2z5p6X5Y-j5rW45L-h5pyD!5e0!3m2!1szh-TW!2stw!4v1633354400098!5m2!1szh-TW!2stw"
+              height="70%"
+              width="80%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
             ></iframe>
+            <!-- <script
+              src="https://maps.googleapis.com/maps/api/staticmap?key=YOUR_API_KEY&center=47.55098906049447,-121.83173209508661&zoom=10&format=png&maptype=roadmap&style=feature:administrative.locality%7Chue:0x2c2e33%7Csaturation:7%7Clightness:19%7Cvisibility:on&style=feature:landscape%7Chue:0xffffff%7Csaturation:-100%7Clightness:100%7Cvisibility:simplified&style=feature:poi%7Chue:0xffffff%7Csaturation:-100%7Clightness:100%7Cvisibility:off&style=feature:road%7Celement:geometry%7Chue:0xbbc0c4%7Csaturation:-93%7Clightness:31%7Cvisibility:simplified&style=feature:road%7Celement:labels%7Chue:0xbbc0c4%7Csaturation:-93%7Clightness:31%7Cvisibility:on&style=feature:road.arterial%7Celement:labels%7Chue:0xbbc0c4%7Csaturation:-93%7Clightness:-2%7Cvisibility:simplified&style=feature:road.local%7Celement:geometry%7Chue:0xe9ebed%7Csaturation:-90%7Clightness:-8%7Cvisibility:simplified&style=feature:transit%7Chue:0xe9ebed%7Csaturation:10%7Clightness:69%7Cvisibility:on&style=feature:water%7Chue:0xe9ebed%7Csaturation:-78%7Clightness:67%7Cvisibility:simplified&size=480x360"
+              defer
+            ></script> -->
           </div>
         </section>
         <section class="section">
-          <div class="h-full flex justify-center items-center"></div>
+          <div class="h-full flex flex-col justify-center items-center">
+            <div class="mt-8 mb-4 text-5xl">Live Streaming</div>
+            <iframe
+              height="80%"
+              width="70%"
+              src="https://www.youtube.com/embed/cl6skUhqj_w"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </section>
       </full-page>
     </no-ssr>
@@ -152,8 +185,13 @@ export default {
         onLeave: this.onLeave,
         navigation: true,
         navigationPosition: 'left',
-        navigationTooltips: ['Bobson & Elva', 'Intro', 'RSVP', 'Thanks'],
-        showActiveTooltip: true,
+        navigationTooltips: [
+          'Bobson & Elva',
+          'Intro',
+          'Location',
+          'Live Streaming',
+        ],
+        showActiveTooltip: false,
       },
     }
   },
@@ -656,7 +694,8 @@ export default {
 }
 
 #intro-image {
-  background-image: url('https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80');
+  /* background-image: url('https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80'); */
+  background-image: url('~/assets/images/intro.png');
   background-repeat: no-repeat;
   background-position: center;
 }
