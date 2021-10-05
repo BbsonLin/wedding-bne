@@ -75,12 +75,23 @@
                 md:text-left
               "
             >
-              <p class="py-0 md:py-2 text-lg md:text-2xl">Date: 2021/10/16</p>
-              <p class="py-0 md:py-2 text-lg md:text-2xl">Time: 14:00 PM</p>
-              <p class="py-0 md:py-2 text-lg md:text-2xl">
-                Location:
+              <div class="py-0 flex md:py-2 text-lg md:text-2xl">
+                <img src="~/assets/images/event_black_24dp.svg" alt="" />
+                <p class="pl-2">2021/10/16</p>
+              </div>
+              <div class="py-0 flex md:py-2 text-lg md:text-2xl">
+                <img src="~/assets/images/schedule_black_24dp.svg" alt="" />
+                <p class="pl-2">14:00 PM</p>
+              </div>
+              <p class="py-0 flex md:py-2 text-lg md:text-2xl">
+                <img src="~/assets/images/location_on_black_24dp.svg" alt="" />
                 <a
-                  class="text-indigo-700 hover:text-indigo-500 cursor-pointer"
+                  class="
+                    text-indigo-700
+                    hover:text-indigo-500
+                    cursor-pointer
+                    pl-2
+                  "
                   @click="goForward"
                 >
                   新北市林口區文化二路一段266號5樓之2(林口浸信會)
@@ -119,7 +130,7 @@
             ></script> -->
           </div>
         </section>
-        <section class="section">
+        <section id="live-streaming" class="section">
           <div class="h-full flex flex-col justify-center items-center">
             <div class="mt-8 mb-4 text-5xl">Live Streaming</div>
             <iframe
@@ -189,7 +200,7 @@ export default {
           'Bobson & Elva',
           'Intro',
           'Location',
-          'Live Streaming',
+          'LiveStreaming',
         ],
         showActiveTooltip: false,
       },
@@ -593,13 +604,13 @@ export default {
 
     afterLoad(orig, dest, direct) {
       console.log("Emitted 'after load' event.", orig, dest, direct)
-      if (dest.index === 0) {
-        // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
-        this.$nextTick(() => {
-          this.$refs.fullpage.api.setAllowScrolling(false)
-          this.$refs.fullpage.api.setKeyboardScrolling(false)
-        })
-      }
+      // if (dest.index === 0) {
+      //   // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
+      //   this.$nextTick(() => {
+      //     this.$refs.fullpage.api.setAllowScrolling(false)
+      //     this.$refs.fullpage.api.setKeyboardScrolling(false)
+      //   })
+      // }
       // if (dest.index === 1) {
       //   this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
       // }

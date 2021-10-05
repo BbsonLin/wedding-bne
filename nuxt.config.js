@@ -38,6 +38,8 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // https://firebase.nuxtjs.org/
+    '@nuxtjs/firebase',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -47,6 +49,22 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
   ],
+
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyBrc47_g9H6RUlFpNZzalVqzQ5kmcZDds4',
+      authDomain: 'bnes-328013.firebaseapp.com',
+      databaseURL:
+        'https://bnes-328013-default-rtdb.asia-southeast1.firebasedatabase.app',
+      projectId: 'bnes-328013',
+      storageBucket: 'bnes-328013.appspot.com',
+      messagingSenderId: '708956429330',
+      appId: '1:708956429330:web:35b525d0454290ae838ccb',
+    },
+    services: {
+      database: true,
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

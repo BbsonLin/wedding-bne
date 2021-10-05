@@ -1,19 +1,20 @@
 {
-    "vetur.validation.template": false,
-    "vetur.completion.scaffoldSnippetSources": {
-        "workspace": "💼",
-        "user": "🗒️",
-        "vetur": "✌"
-    },
-    "eslint.validate": ["vue", "html", "javascript"],
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "editor.quickSuggestions": {
-        "strings": true
-    }
+  "vetur.validation.template": false,
+  "vetur.completion.scaffoldSnippetSources": {
+    "workspace": "💼",
+    "user": "🗒️",
+    "vetur": "✌"
+  },
+  "eslint.validate": ["vue", "html", "javascript"],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "cmake.configureOnOpen": false
 }
