@@ -13,11 +13,13 @@
               @touchended="mouseReleased"
             ></vue-p5>
           </div>
-          <button class="btn-forward px-2 py-4" @click="goForward">SKIP</button>
+          <button class="btn-forward px-2 py-6 text-xs" @click="goForward">
+            RING THE BELL OR SROLL DOWN
+          </button>
         </section>
         <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
         <section id="intro" class="section">
-          <div class="h-screen grid grid-cols-8 grid-rows-6 gap-2">
+          <div class="h-full grid grid-cols-8 grid-rows-6 gap-2">
             <div
               class="
                 h-full
@@ -47,7 +49,7 @@
                 pt-8
                 col-span-full
                 row-start-2 row-end-[-1]
-                md:col-start-5 md:col-span-4
+                md:col-start-4 md:col-span-5
                 md:row-span-full
               "
             >
@@ -64,26 +66,26 @@
                 w-full
                 p-2
                 col-start-3 col-end-[-1]
-                row-start-5 row-end-[-1]
-                md:col-start-2 md:col-span-4
+                row-start-5 row-end-[-2]
+                md:col-start-2 md:col-span-3
                 md:row-start-4 md:row-span-2
                 md:flex md:flex-col
-                md:justify-center
+                md:justify-evenly
                 bg-white bg-opacity-70
                 rounded
                 text-xl
                 md:text-left
               "
             >
-              <div class="py-0 flex md:py-2 text-lg md:text-2xl">
+              <div class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
                 <img src="~/assets/images/event_black_24dp.svg" alt="" />
-                <p class="pl-2">2021/10/16</p>
+                <p class="pl-2">2021.10.16</p>
               </div>
-              <div class="py-0 flex md:py-2 text-lg md:text-2xl">
+              <div class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
                 <img src="~/assets/images/schedule_black_24dp.svg" alt="" />
-                <p class="pl-2">14:00 PM</p>
+                <p class="pl-2">2:00 pm | 90 mins</p>
               </div>
-              <p class="py-0 flex md:py-2 text-lg md:text-2xl">
+              <p class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
                 <img src="~/assets/images/location_on_black_24dp.svg" alt="" />
                 <a
                   class="
@@ -94,7 +96,7 @@
                   "
                   @click="goForward"
                 >
-                  新北市林口區文化二路一段266號5樓之2(林口浸信會)
+                  林口浸信會
                 </a>
               </p>
             </div>
@@ -230,7 +232,7 @@ export default {
         // (sketch.windowHeight * 4) / 5
       )
       if (sketch.width < 576) this.widthOffset = 100
-      sketch.background('#abd8e0')
+      sketch.background('#a4d5d0')
 
       Events.on(engine, 'collisionStart', (evt) => {
         for (const pair of evt.pairs) {
@@ -342,7 +344,7 @@ export default {
       Engine.run(wordsEngine)
     },
     draw(sketch) {
-      sketch.background('#abd8e0')
+      sketch.background('#a4d5d0')
       // sketch.ellipse(sketch.mouseX, sketch.mouseY, 20, 20)
 
       // Draw mouse pointer
@@ -398,7 +400,7 @@ export default {
       for (const sand of this.sandBoxes) {
         sketch.beginShape()
         sketch.strokeWeight(0)
-        sketch.fill('#b7dbdb')
+        sketch.fill('#a4d5d0')
         for (const vert of sand.vertices) {
           sketch.vertex(vert.x, vert.y)
         }
@@ -631,13 +633,16 @@ export default {
 
 <style scoped>
 .bg-wedding {
-  background-image: linear-gradient(
+  background-color: #a4d5d0;
+
+  /* background-image: linear-gradient(
     to bottom,
-    #abd8e0 0%,
+    #a4d5d0 0%,
+    #a4d5d0 100%,
     #d5e3ce 96%,
     #dddec9 98%,
     #f7e6ba 100%
-  );
+  ); */
 }
 
 #fp-nav ul li a span {
