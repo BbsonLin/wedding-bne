@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-wedding">
+  <div class="bg-wedding text-desaturated-blue-500">
     <no-ssr>
       <full-page ref="fullpage" :options="options">
         <section class="section">
@@ -13,11 +13,14 @@
               @touchended="mouseReleased"
             ></vue-p5>
           </div>
+          <button class="btn-reload px-2 py-6 text-sm" @click="getMoreHearts">
+            GET MORE HEARTS ♥
+          </button>
           <button
-            class="btn-forward px-2 py-6 text-xs md:text-base"
+            class="btn-forward px-2 py-6 text-xs md:text-lg"
             @click="goForward"
           >
-            RING THE BELL OR SROLL DOWN
+            RING THE BELL OR PRESS ME TO SCROLL DOWN
           </button>
         </section>
         <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
@@ -77,31 +80,56 @@
                 md:row-start-4 md:row-span-2
                 md:flex md:flex-col
                 md:justify-evenly
-                bg-white bg-opacity-70
+                bg-dark-cyan-500 bg-opacity-75
                 rounded
                 text-xl
                 md:text-left
               "
             >
-              <div class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
+              <div
+                class="
+                  pl-2
+                  py-0
+                  md:pl-6
+                  md:py-2
+                  flex
+                  text-2xl
+                  md:text-3xl
+                  text-white
+                "
+              >
                 <img src="~/assets/images/event_black_24dp.svg" alt="" />
                 <p class="pl-2">2021.10.16</p>
               </div>
-              <div class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
+              <div
+                class="
+                  pl-2
+                  py-0
+                  md:pl-6
+                  md:py-2
+                  flex
+                  text-2xl
+                  md:text-3xl
+                  text-white
+                "
+              >
                 <img src="~/assets/images/schedule_black_24dp.svg" alt="" />
                 <p class="pl-2">2:00 pm | 90 mins</p>
               </div>
-              <p class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
+              <p
+                class="
+                  pl-2
+                  py-0
+                  md:pl-6
+                  md:py-2
+                  flex
+                  text-lg
+                  md:text-2xl
+                  text-white
+                "
+              >
                 <img src="~/assets/images/location_on_black_24dp.svg" alt="" />
-                <a
-                  class="
-                    text-indigo-700
-                    hover:text-indigo-500
-                    cursor-pointer
-                    pl-2
-                  "
-                  @click="goForward"
-                >
+                <a class="cursor-pointer pl-2" @click="goForward">
                   林口浸信會
                 </a>
               </p>
@@ -116,17 +144,9 @@
               Similique quis et minima possimus consectetur dolorum quibusdam
               dolorem,
             </div> -->
-            <!-- <iframe
-              v-scroll-animater="'fadein-up'"
-              src="https://www.surveycake.com/s/947X1"
-              allowTransparency="true"
-              frameborder="0"
-              height="80%"
-              width="90%"
-            ></iframe> -->
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.8408151080453!2d121.37079341489658!3d25.07338394286574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a6df26d9659d%3A0xb247253f6c483b8d!2z5p6X5Y-j5rW45L-h5pyD!5e0!3m2!1szh-TW!2stw!4v1633354400098!5m2!1szh-TW!2stw"
-              class="h-3/4 md:h-5/6 w-3/4 md:w-5/6 lg:w-11/12"
+              class="h-3/4 md:h-[5/8] w-3/4 md:w-5/6 lg:w-11/12"
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
@@ -148,6 +168,23 @@
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
+            <footer
+              class="
+                h-1/10
+                w-full
+                mt-4
+                py-2
+                bg-cool-gray-50 bg-opacity-30
+                flex
+                justify-center
+                items-center
+              "
+            >
+              <img src="~assets/images/BE_icon.png" class="w-12" alt="" />
+              <p class="pl-4 text-sm md:text-xl">
+                © 2021 Made by Bobson Lin. All rights reserved.
+              </p>
+            </footer>
           </div>
         </section>
       </full-page>
@@ -414,11 +451,13 @@ export default {
       for (const b of this.balls) {
         sketch.beginShape()
         // sketch.fill('#fff')
+        sketch.noFill()
+        sketch.noStroke()
         for (const vert of b.vertices) {
           sketch.vertex(vert.x, vert.y)
         }
         sketch.endShape(sketch.CLOSE)
-        sketch.image(this.heartImage, b.position.x, b.position.y, 35, 35)
+        sketch.image(this.heartImage, b.position.x, b.position.y, 45, 45)
       }
 
       sketch.imageMode(sketch.CENTER)
@@ -450,7 +489,7 @@ export default {
       sketch.push()
       sketch.translate(this.bell.position.x, this.bell.position.y)
       sketch.rotate(this.bell.angle)
-      sketch.image(this.bellImage, 0, 0, 50, 50)
+      sketch.image(this.bellImage, 0, 0, 40, 45)
       sketch.pop()
 
       this.createCloud(sketch, this.cloudx, this.cloudy - 25)
@@ -491,6 +530,17 @@ export default {
       setTimeout(() => {
         this.sling.bodyB = null
       }, 70)
+    },
+    getMoreHearts() {
+      const newBall = Bodies.circle(
+        200 - this.widthOffset,
+        window.innerHeight - 100,
+        15,
+        { restitution: 0.3 }
+      )
+      this.balls.push(newBall)
+      World.add(engine.world, newBall)
+      this.sling.bodyB = newBall
     },
     createSandbox(sketch) {
       const ground = Bodies.rectangle(
@@ -537,7 +587,7 @@ export default {
     createChurch(sketch, baseX, baseY) {
       sketch.push()
       // Base
-      sketch.fill('pink')
+      sketch.fill('#f7ada7')
       sketch.stroke('white')
       sketch.strokeWeight(5)
       sketch.rect(baseX - 5, baseY, 210, 100)
@@ -571,28 +621,31 @@ export default {
     },
     createChurchDoor(sketch, baseX, baseY) {
       sketch.push()
-      sketch.fill('#057dba')
+      sketch.fill('#91aaaf')
       sketch.rect(baseX, baseY, 50, 75)
 
-      sketch.fill('#91aaaf')
-      sketch.strokeWeight(1)
-      sketch.rect(baseX + 5, baseY + 5, 15, 30)
-      sketch.rect(baseX + 30, baseY + 5, 15, 30)
+      sketch.fill('#5a6b6e')
+      // sketch.strokeWeight(1)
+      sketch.noStroke()
+      sketch.rect(baseX + 6, baseY + 5, 15, 30)
+      sketch.rect(baseX + 29, baseY + 5, 15, 30)
 
-      sketch.rect(baseX + 5, baseY + 40, 15, 25)
-      sketch.rect(baseX + 30, baseY + 40, 15, 25)
+      sketch.rect(baseX + 6, baseY + 40, 15, 25)
+      sketch.rect(baseX + 29, baseY + 40, 15, 25)
 
-      sketch.stroke('#2a384e')
+      sketch.stroke('white')
+      sketch.strokeWeight(2)
       sketch.line(baseX + 25, baseY + 5, baseX + 25, baseY + 70)
       sketch.pop()
     },
     createChurchWindow(sketch, baseX, baseY) {
       sketch.push()
       sketch.fill('#5a6b6e')
-      sketch.strokeWeight(1)
+      sketch.strokeWeight(3)
       sketch.rect(baseX, baseY, 40, 50)
 
       sketch.stroke('white')
+      // sketch.stroke('#f7ada7')
       sketch.strokeWeight(2)
       sketch.line(baseX + 20, baseY, baseX + 20, baseY + 50)
       sketch.line(baseX, baseY + 25, baseX + 40, baseY + 25)
@@ -610,13 +663,13 @@ export default {
 
     afterLoad(orig, dest, direct) {
       console.log("Emitted 'after load' event.", orig, dest, direct)
-      // if (dest.index === 0) {
-      //   // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
-      //   this.$nextTick(() => {
-      //     this.$refs.fullpage.api.setAllowScrolling(false)
-      //     this.$refs.fullpage.api.setKeyboardScrolling(false)
-      //   })
-      // }
+      if (dest.index === 0) {
+        // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
+        this.$nextTick(() => {
+          this.$refs.fullpage.api.setAllowScrolling(false)
+          this.$refs.fullpage.api.setKeyboardScrolling(false)
+        })
+      }
       // if (dest.index === 1) {
       //   this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
       // }
@@ -666,6 +719,13 @@ export default {
 .btn-forward {
   position: absolute;
   left: 50%;
+  top: calc(100% - 4.5rem);
+  transform: translateX(-50%);
+}
+
+.btn-reload {
+  position: absolute;
+  left: 5rem;
   top: calc(100% - 4.5rem);
   transform: translateX(-50%);
 }
@@ -721,8 +781,8 @@ export default {
 }
 
 #intro-info-box {
-  font-family: '微軟正黑體', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* font-family: '微軟正黑體', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif; */
   font-weight: bold;
 }
 
