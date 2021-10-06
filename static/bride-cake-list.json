@@ -1,0 +1,12 @@
+{
+  "list": [
+    {
+      "name": "test",
+      "taken": false
+    },
+    {
+      "name": "test2",
+      "taken": false
+    }
+  ]
+}

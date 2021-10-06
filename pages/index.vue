@@ -13,11 +13,29 @@
               @touchended="mouseReleased"
             ></vue-p5>
           </div>
-          <button class="btn-forward px-2 py-4" @click="goForward">SKIP</button>
+          <button
+            class="btn-forward px-2 py-6 text-xs md:text-base"
+            @click="goForward"
+          >
+            RING THE BELL OR SROLL DOWN
+          </button>
         </section>
         <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
         <section id="intro" class="section">
-          <div class="h-screen grid grid-cols-8 grid-rows-6 gap-2">
+          <div class="h-full grid grid-cols-8 grid-rows-6 gap-2">
+            <div
+              id="intro-image"
+              v-scroll-animater="'fadein-up'"
+              class="
+                h-full
+                w-full
+                pt-8
+                col-span-full
+                row-start-2 row-end-[-1]
+                md:col-start-4 md:col-span-5
+                md:row-span-full
+              "
+            ></div>
             <div
               class="
                 h-full
@@ -33,57 +51,58 @@
             >
               <p
                 v-scroll-animater="'fadein-left'"
-                class="text-4xl md:text-5xl pt-5 md:pt-0 md:pl-4 md:text-right"
+                class="
+                  text-4xl
+                  md:text-5xl
+                  lg:text-7xl
+                  pt-5
+                  md:pt-0
+                  md:pl-4
+                  md:text-right
+                "
               >
                 We are getting married.
               </p>
             </div>
             <div
-              id="intro-image"
-              v-scroll-animater="'fadein-up'"
-              class="
-                h-full
-                w-full
-                pt-8
-                col-span-full
-                row-start-2 row-end-[-1]
-                md:col-start-5 md:col-span-4
-                md:row-span-full
-              "
-            >
-              <!-- <img
-                class="h-full"
-                src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
-                alt=""
-              /> -->
-            </div>
-            <div
+              id="intro-info-box"
               v-scroll-animater="'fadein-left'"
               class="
                 h-full
                 w-full
                 p-2
                 col-start-3 col-end-[-1]
-                row-start-5 row-end-[-1]
-                md:col-start-2 md:col-span-4
+                row-start-5 row-end-[-2]
+                md:col-start-2 md:col-span-3
                 md:row-start-4 md:row-span-2
                 md:flex md:flex-col
-                md:justify-center
+                md:justify-evenly
                 bg-white bg-opacity-70
                 rounded
                 text-xl
                 md:text-left
               "
             >
-              <p class="py-0 md:py-2 text-lg md:text-2xl">Date: 2021/10/16</p>
-              <p class="py-0 md:py-2 text-lg md:text-2xl">Time: 14:00 PM</p>
-              <p class="py-0 md:py-2 text-lg md:text-2xl">
-                Location:
+              <div class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
+                <img src="~/assets/images/event_black_24dp.svg" alt="" />
+                <p class="pl-2">2021.10.16</p>
+              </div>
+              <div class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
+                <img src="~/assets/images/schedule_black_24dp.svg" alt="" />
+                <p class="pl-2">2:00 pm | 90 mins</p>
+              </div>
+              <p class="pl-2 py-0 md:pl-6 md:py-2 flex text-lg md:text-2xl">
+                <img src="~/assets/images/location_on_black_24dp.svg" alt="" />
                 <a
-                  class="text-indigo-700 hover:text-indigo-500 cursor-pointer"
+                  class="
+                    text-indigo-700
+                    hover:text-indigo-500
+                    cursor-pointer
+                    pl-2
+                  "
                   @click="goForward"
                 >
-                  新北市林口區文化二路一段266號5樓之2(林口浸信會)
+                  林口浸信會
                 </a>
               </p>
             </div>
@@ -107,8 +126,7 @@
             ></iframe> -->
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.8408151080453!2d121.37079341489658!3d25.07338394286574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a6df26d9659d%3A0xb247253f6c483b8d!2z5p6X5Y-j5rW45L-h5pyD!5e0!3m2!1szh-TW!2stw!4v1633354400098!5m2!1szh-TW!2stw"
-              height="70%"
-              width="80%"
+              class="h-3/4 md:h-5/6 w-3/4 md:w-5/6 lg:w-11/12"
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
@@ -119,13 +137,12 @@
             ></script> -->
           </div>
         </section>
-        <section class="section">
+        <section id="live-streaming" class="section">
           <div class="h-full flex flex-col justify-center items-center">
             <div class="mt-8 mb-4 text-5xl">Live Streaming</div>
             <iframe
-              height="80%"
-              width="70%"
               src="https://www.youtube.com/embed/cl6skUhqj_w"
+              class="h-3/4 md:h-5/6 w-3/4 md:w-5/6 lg:w-11/12"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -189,7 +206,7 @@ export default {
           'Bobson & Elva',
           'Intro',
           'Location',
-          'Live Streaming',
+          'LiveStreaming',
         ],
         showActiveTooltip: false,
       },
@@ -219,7 +236,7 @@ export default {
         // (sketch.windowHeight * 4) / 5
       )
       if (sketch.width < 576) this.widthOffset = 100
-      sketch.background('#abd8e0')
+      sketch.background('#a4d5d0')
 
       Events.on(engine, 'collisionStart', (evt) => {
         for (const pair of evt.pairs) {
@@ -331,7 +348,7 @@ export default {
       Engine.run(wordsEngine)
     },
     draw(sketch) {
-      sketch.background('#abd8e0')
+      sketch.background('#a4d5d0')
       // sketch.ellipse(sketch.mouseX, sketch.mouseY, 20, 20)
 
       // Draw mouse pointer
@@ -387,7 +404,7 @@ export default {
       for (const sand of this.sandBoxes) {
         sketch.beginShape()
         sketch.strokeWeight(0)
-        sketch.fill('#b7dbdb')
+        sketch.fill('#a4d5d0')
         for (const vert of sand.vertices) {
           sketch.vertex(vert.x, vert.y)
         }
@@ -593,13 +610,13 @@ export default {
 
     afterLoad(orig, dest, direct) {
       console.log("Emitted 'after load' event.", orig, dest, direct)
-      if (dest.index === 0) {
-        // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
-        this.$nextTick(() => {
-          this.$refs.fullpage.api.setAllowScrolling(false)
-          this.$refs.fullpage.api.setKeyboardScrolling(false)
-        })
-      }
+      // if (dest.index === 0) {
+      //   // this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
+      //   this.$nextTick(() => {
+      //     this.$refs.fullpage.api.setAllowScrolling(false)
+      //     this.$refs.fullpage.api.setKeyboardScrolling(false)
+      //   })
+      // }
       // if (dest.index === 1) {
       //   this.$refs.aniText.style = 'opacity: 1; transform: translateZ(0);'
       // }
@@ -620,13 +637,16 @@ export default {
 
 <style scoped>
 .bg-wedding {
-  background-image: linear-gradient(
+  background-color: #a4d5d0;
+
+  /* background-image: linear-gradient(
     to bottom,
-    #abd8e0 0%,
+    #a4d5d0 0%,
+    #a4d5d0 100%,
     #d5e3ce 96%,
     #dddec9 98%,
     #f7e6ba 100%
-  );
+  ); */
 }
 
 #fp-nav ul li a span {
@@ -698,6 +718,12 @@ export default {
   background-image: url('~/assets/images/intro.png');
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#intro-info-box {
+  font-family: '微軟正黑體', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
 }
 
 iframe {

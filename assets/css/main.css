@@ -13,3 +13,31 @@
   font-display: swap;
   src: url('~assets/fonts/AdoraBouton-Regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('~assets/fonts/Caveat-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('~assets/fonts/Caveat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('~assets/fonts/Caveat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('~assets/fonts/Caveat-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
