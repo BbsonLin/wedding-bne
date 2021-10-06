@@ -13,7 +13,10 @@
               @touchended="mouseReleased"
             ></vue-p5>
           </div>
-          <button class="btn-reload px-2 py-6 text-sm" @click="getMoreHearts">
+          <button
+            class="btn-reload px-2 py-6 text-xs md:text-sm"
+            @click="getMoreHearts"
+          >
             GET MORE HEARTS ♥
           </button>
           <button
@@ -725,8 +728,8 @@ export default {
 
 .btn-reload {
   position: absolute;
-  left: 5rem;
-  top: calc(100% - 4.5rem);
+  left: 4rem;
+  top: calc(100% - 3rem);
   transform: translateX(-50%);
 }
 
