@@ -13,13 +13,29 @@
               @touchended="mouseReleased"
             ></vue-p5>
           </div>
-          <button class="btn-forward px-2 py-6 text-xs" @click="goForward">
+          <button
+            class="btn-forward px-2 py-6 text-xs md:text-base"
+            @click="goForward"
+          >
             RING THE BELL OR SROLL DOWN
           </button>
         </section>
         <!-- <audio :src="require('@/assets/audios/church-bell.wav')" controls></audio> -->
         <section id="intro" class="section">
           <div class="h-full grid grid-cols-8 grid-rows-6 gap-2">
+            <div
+              id="intro-image"
+              v-scroll-animater="'fadein-up'"
+              class="
+                h-full
+                w-full
+                pt-8
+                col-span-full
+                row-start-2 row-end-[-1]
+                md:col-start-4 md:col-span-5
+                md:row-span-full
+              "
+            ></div>
             <div
               class="
                 h-full
@@ -35,31 +51,21 @@
             >
               <p
                 v-scroll-animater="'fadein-left'"
-                class="text-4xl md:text-5xl pt-5 md:pt-0 md:pl-4 md:text-right"
+                class="
+                  text-4xl
+                  md:text-5xl
+                  lg:text-7xl
+                  pt-5
+                  md:pt-0
+                  md:pl-4
+                  md:text-right
+                "
               >
                 We are getting married.
               </p>
             </div>
             <div
-              id="intro-image"
-              v-scroll-animater="'fadein-up'"
-              class="
-                h-full
-                w-full
-                pt-8
-                col-span-full
-                row-start-2 row-end-[-1]
-                md:col-start-4 md:col-span-5
-                md:row-span-full
-              "
-            >
-              <!-- <img
-                class="h-full"
-                src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80"
-                alt=""
-              /> -->
-            </div>
-            <div
+              id="intro-info-box"
               v-scroll-animater="'fadein-left'"
               class="
                 h-full
@@ -120,8 +126,7 @@
             ></iframe> -->
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.8408151080453!2d121.37079341489658!3d25.07338394286574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a6df26d9659d%3A0xb247253f6c483b8d!2z5p6X5Y-j5rW45L-h5pyD!5e0!3m2!1szh-TW!2stw!4v1633354400098!5m2!1szh-TW!2stw"
-              height="70%"
-              width="80%"
+              class="h-3/4 md:h-5/6 w-3/4 md:w-5/6 lg:w-11/12"
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
@@ -136,9 +141,8 @@
           <div class="h-full flex flex-col justify-center items-center">
             <div class="mt-8 mb-4 text-5xl">Live Streaming</div>
             <iframe
-              height="80%"
-              width="70%"
               src="https://www.youtube.com/embed/cl6skUhqj_w"
+              class="h-3/4 md:h-5/6 w-3/4 md:w-5/6 lg:w-11/12"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -714,6 +718,12 @@ export default {
   background-image: url('~/assets/images/intro.png');
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#intro-info-box {
+  font-family: '微軟正黑體', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
 }
 
 iframe {
