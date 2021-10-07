@@ -1,11 +1,30 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'BnEs',
+    title: 'B&E Wedding',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: '我們要在10/16結婚了!',
+      },
+      {
+        hid: 'apple-mobile-web-app-title',
+        property: 'apple-mobile-web-app-title',
+        content: 'B&E Wedding',
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'B&E Wedding',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: '我們要在10/16結婚了!',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

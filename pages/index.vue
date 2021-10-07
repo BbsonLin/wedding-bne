@@ -53,6 +53,7 @@
                 row-start-1
                 md:col-start-1 md:col-span-4
                 md:row-start-1 md:row-span-3
+                lg:col-start-2 lg:col-span-4
               "
             >
               <p
@@ -185,7 +186,7 @@
             >
               <img src="~assets/images/BE_icon.png" class="w-12" alt="" />
               <p class="pl-4 text-sm md:text-xl">
-                © 2021 Made by Bobson Lin. All rights reserved.
+                © 2021 Made by Bobson & Elva. All rights reserved.
               </p>
             </footer>
           </div>
