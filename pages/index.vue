@@ -14,7 +14,15 @@
             ></vue-p5>
           </div>
           <button
-            class="btn-reload animate-wiggle px-2 py-6 text-xs md:text-sm"
+            class="
+              btn-reload
+              animate-wiggle
+              pl-1
+              md:px-2
+              py-6
+              text-xs
+              md:text-sm
+            "
             @click="getMoreHearts"
           >
             GET MORE HEARTS ♥
@@ -800,7 +808,7 @@ export default {
 
 .btn-reload {
   position: absolute;
-  left: 4rem;
+  left: 0.5rem;
   top: calc(100% - 3rem);
   transform: translateX(-50%);
 }
