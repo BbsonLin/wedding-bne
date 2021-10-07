@@ -29,6 +29,7 @@ steps:
       - docker-compose up -d
       - echo "Sleep 5 secs, then show containers..."
       - echo "=== Checkout docker containers ==="
+      - docker rmi $(docker images -f "dangling=true" -q)
       - sleep 5 && docker ps -a
 
 # ---
