@@ -33,6 +33,20 @@ module.exports = {
           500: '#008689',
         },
       },
+      keyframes: {
+        pulseScale: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+      },
+      animation: {
+        'pulse-scale': 'pulseScale 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        wiggle: 'wiggle 1s ease-in-out infinite',
+      },
     },
     // https://tailwindcss.com/docs/min-width#min-width-scale
     minWidth: {
