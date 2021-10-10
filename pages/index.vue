@@ -109,7 +109,7 @@
                 h-full
                 w-full
                 p-2
-                col-start-3 col-end-[-1]
+                col-start-2 col-end-[-1]
                 row-start-5 row-end-[-2]
                 md:col-start-2 md:col-span-3
                 md:row-start-4 md:row-span-2
@@ -117,7 +117,6 @@
                 md:justify-evenly
                 bg-dark-cyan-500 bg-opacity-75
                 rounded
-                text-xl
                 md:text-left
               "
             >
@@ -129,7 +128,7 @@
                   md:py-2
                   flex
                   items-center
-                  text-2xl
+                  text-xl
                   md:text-3xl
                   text-white
                 "
@@ -158,7 +157,7 @@
                   md:py-2
                   flex
                   items-center
-                  text-2xl
+                  text-xl
                   md:text-3xl
                   text-white
                 "
