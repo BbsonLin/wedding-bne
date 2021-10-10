@@ -177,7 +177,7 @@
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <p class="pl-2">2:00 pm | 90 mins</p>
+                <p class="pl-2">2:00 pm (1:30 pm 入場) | 90 mins</p>
               </div>
               <p
                 class="
