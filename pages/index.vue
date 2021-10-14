@@ -186,8 +186,8 @@
                   md:py-2
                   flex
                   items-center
-                  text-lg
-                  md:text-2xl
+                  text-xl
+                  md:text-3xl
                   text-white
                 "
               >

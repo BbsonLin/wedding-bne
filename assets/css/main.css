@@ -41,3 +41,10 @@
   font-weight: bold;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'DFHsiu';
+  src: url('~assets/fonts/DFHsiu.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
